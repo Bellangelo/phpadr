@@ -1,5 +1,5 @@
 {
-    "name": "globtec/phpadr",
+    "name": "bellangelo/phpadr",
     "description": "A PHP based command-line interface tool for working with ADR",
     "type": "library",
     "license": "MIT",
@@ -12,8 +12,8 @@
     ],
     "authors": [
         {
-            "name": "José Carlos",
-            "email": "josecarlos@globtec.com.br"
+            "name": "Aggelos Bellos",
+            "email": "aggelosbellos7@gmail.com"
         }
     ],
     "require": {
