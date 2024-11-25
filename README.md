@@ -19,7 +19,7 @@ Architecture Decision Records (ADR) is a technique for capturing important archi
 You can install this tool using the [Composer](https://getcomposer.org/), execute the following command.
 
 ```
-composer require globtec/phpadr --dev
+composer require bellangelo/phpadr --dev
 ```
 
 ## Usage
