@@ -4,9 +4,9 @@ namespace ADR\Filesystem;
 
 class AutoDiscoverConfig
 {
-    private const DEFAULT_CONFIG = __DIR__ . '/../adr.yml';
+    private const DEFAULT_CONFIG = __DIR__ . '/../../adr.yml';
 
-    public function getRootConfig(): ?string
+    private function getRootConfig(): ?string
     {
         if (empty($GLOBALS['_composer_autoload_path'])) {
             return null;
@@ -25,9 +25,9 @@ class AutoDiscoverConfig
     public function getConfig(string $configLocation): string
     {
         if (empty($configLocation)) {
-            return $this->getRootConfig() ?? self::DEFAULT_CONFIG;
+            return $this->getRootConfig() ?? realpath(self::DEFAULT_CONFIG);
         }
 
-        return $configLocation;
+        return realpath($configLocation) ?: '';
     }
 }
