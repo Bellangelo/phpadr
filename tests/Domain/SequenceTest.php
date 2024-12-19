@@ -14,7 +14,7 @@ class SequenceTest extends TestCase
      */
     private $workspace;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->workspace = $this->getMockBuilder(Workspace::class)
             ->disableOriginalConstructor()
