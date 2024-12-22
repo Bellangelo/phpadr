@@ -15,7 +15,7 @@ class WorkspaceListCommandTest extends TestCase
      */
     private $command;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->command = new WorkspaceListCommand();
     }
