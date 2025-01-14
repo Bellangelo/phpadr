@@ -31,7 +31,7 @@ class WorkspaceListCommand extends Command
                 null,
                 InputOption::VALUE_REQUIRED,
                 'Config file',
-                'vendor/globtec/phpadr/adr.yml'
+                realpath(__DIR__ . '/../../adr.yml')
             );
     }
 

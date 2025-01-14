@@ -17,7 +17,7 @@ It will be used the [Composer](https://getcomposer.org/) as tool for dependency 
 This project can also be installed with Composer using the following command:
 
 ```
-composer require globtec/phpadr --dev dev-master
+composer require bellangelo/phpadr --dev dev-master
 ```
 
 ## Consequences
