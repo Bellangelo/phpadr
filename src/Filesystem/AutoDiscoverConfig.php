@@ -28,7 +28,7 @@ class AutoDiscoverConfig
             return $this->getRootConfig() ?? realpath(self::DEFAULT_CONFIG);
         }
 
-        return realpath($configLocation) ?: '';
+        return $configLocation;
     }
 
     public function getConfig(string $configLocation): Config

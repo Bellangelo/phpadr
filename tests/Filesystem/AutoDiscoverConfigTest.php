@@ -17,14 +17,14 @@ class AutoDiscoverConfigTest extends TestCase
     {
         $config = (new AutoDiscoverConfig())->getConfigPath(__DIR__ . '/../../adr.yml');
 
-        $this->assertSame(realpath(__DIR__ . '/../../adr.yml'), $config);
+        $this->assertSame(__DIR__ . '/../../adr.yml', $config);
     }
 
-    public function testGetConfigReturnsEmptyIfPassedValueDoesNotExist(): void
+    public function testGetConfigReturnsEvenIfPassedValueDoesNotExist(): void
     {
         $config = (new AutoDiscoverConfig())->getConfigPath('does-not-exist.yml');
 
-        $this->assertSame('', $config);
+        $this->assertSame('does-not-exist.yml', $config);
     }
 
     public function testGetConfigReturnsRootConfig(): void
