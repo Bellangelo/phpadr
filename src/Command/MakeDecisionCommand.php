@@ -5,7 +5,7 @@ namespace ADR\Command;
 use ADR\Domain\DecisionContent;
 use ADR\Domain\DecisionRecord;
 use ADR\Domain\Sequence;
-use ADR\Filesystem\Config;
+use ADR\Filesystem\AutoDiscoverConfig;
 use ADR\Filesystem\Workspace;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -54,8 +54,7 @@ class MakeDecisionCommand extends Command
                 'config',
                 null,
                 InputOption::VALUE_REQUIRED,
-                'Config file',
-                realpath(__DIR__ . '/../../adr.yml')
+                'Config file'
             );
     }
 
@@ -67,7 +66,8 @@ class MakeDecisionCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $config = new Config($input->getOption('config'));
+        $discoverConfig = new AutoDiscoverConfig();
+        $config = $discoverConfig->getConfig((string) $input->getOption('config'));
         $workspace = new Workspace($config->directory());
         $sequence = new Sequence($workspace);
         $content = new DecisionContent($sequence->next(), $input->getArgument('title'), $input->getArgument('status'));

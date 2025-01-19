@@ -2,7 +2,7 @@
 
 namespace ADR\Command;
 
-use ADR\Filesystem\Config;
+use ADR\Filesystem\AutoDiscoverConfig;
 use ADR\Filesystem\Workspace;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -30,8 +30,7 @@ class WorkspaceCountCommand extends Command
                 'config',
                 null,
                 InputOption::VALUE_REQUIRED,
-                'Config file',
-                realpath(__DIR__ . '/../../adr.yml')
+                'Config file'
             );
     }
 
@@ -43,7 +42,8 @@ class WorkspaceCountCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $config = new Config($input->getOption('config'));
+        $discoverConfig = new AutoDiscoverConfig();
+        $config = $discoverConfig->getConfig((string) $input->getOption('config'));
         $style = new SymfonyStyle($input, $output);
         $workspace = new Workspace($config->directory());
 
