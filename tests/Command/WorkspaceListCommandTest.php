@@ -62,11 +62,11 @@ class WorkspaceListCommandTest extends TestCase
         $configContent = file_get_contents('adr.yml');
         $configContent = str_replace('docs/arch', $vfs->url(), $configContent);
         $configContent = str_replace('vendor/bellangelo/phpadr/', '', $configContent);
-        $configFile = vfsStream::newFile('adr.yml')->at($vfs)->setContent($configContent)->url();
+        $configFile = vfsStream::newFile('adr-test.yml')->at($vfs)->setContent($configContent);
 
         $input = [
             'command'  => $this->command->getName(),
-            '--config' => $configFile,
+            '--config' => $configFile->url(),
         ];
 
         (new Application())->add($this->command);
@@ -83,5 +83,28 @@ class WorkspaceListCommandTest extends TestCase
 
         $this->assertStringContainsString('0001-foo.md', $tester->getDisplay());
         $this->assertStringContainsString('0002-bar.md', $tester->getDisplay());
+    }
+
+    public function testExecuteWithAutoDiscovery()
+    {
+        $originalValue = $GLOBALS['_composer_autoload_path'] ?? '';
+        $GLOBALS['_composer_autoload_path'] = __DIR__ . '/../data/vendor/autoload.php';
+
+        try {
+            $input = [
+                'command' => $this->command->getName(),
+            ];
+
+            (new Application())->add($this->command);
+
+            $tester = new CommandTester($this->command);
+            $tester->execute($input);
+
+            $this->assertStringContainsString('0001-test1.md', $tester->getDisplay());
+            $this->assertStringContainsString('0002-test2.md', $tester->getDisplay());
+
+        } finally {
+            $GLOBALS['_composer_autoload_path'] = $originalValue;
+        }
     }
 }

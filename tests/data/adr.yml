@@ -1,0 +1,3 @@
+directory: tests/data/docs/arch
+template:
+  decision-record: ./skeleton.md
