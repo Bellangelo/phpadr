@@ -82,7 +82,7 @@ class WorkspaceListCommandTest extends TestCase
 
         $tester->execute($input);
 
-        $this->assertContains('0001-foo.md', $tester->getDisplay());
-        $this->assertContains('0002-bar.md', $tester->getDisplay());
+        $this->assertStringContainsString('0001-foo.md', $tester->getDisplay());
+        $this->assertStringContainsString('0002-bar.md', $tester->getDisplay());
     }
 }

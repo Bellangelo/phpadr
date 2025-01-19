@@ -19,20 +19,18 @@ class DecisionContentTest extends TestCase
         $this->assertEquals($output, $content->getStatus());
     }
 
-    /**
-     * @expectedException InvalidArgumentException
-     */
     public function testInstanceFailureWithTitle()
     {
+        $this->expectException(InvalidArgumentException::class);
+
         new DecisionContent(1,
             'A very large title should not be used in arquitecture decision record because this attribute must be short noun phrases');
     }
 
-    /**
-     * @expectedException InvalidArgumentException
-     */
     public function testInstanceFailureWithStatus()
     {
+        $this->expectException(InvalidArgumentException::class);
+
         new DecisionContent(1, 'Foo', 'Superseded');
     }
 

@@ -29,7 +29,7 @@ class AutoDiscoverConfigTest extends TestCase
 
     public function testGetConfigReturnsRootConfig(): void
     {
-        $originalValue = $GLOBALS['_composer_autoload_path'];
+        $originalValue = $GLOBALS['_composer_autoload_path'] ?? '';
         $GLOBALS['_composer_autoload_path'] = __DIR__ . '/../../vendor/autoload.php';
 
         try {

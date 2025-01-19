@@ -51,8 +51,8 @@ class DecisionRecordTest extends TestCase
 
         $output = $record->output();
 
-        $this->assertContains('# 1. Foo', $output);
-        $this->assertContains(date('Y-m-d'), $output);
-        $this->assertContains('Accepted', $output);
+        $this->assertStringContainsString('# 1. Foo', $output);
+        $this->assertStringContainsString(date('Y-m-d'), $output);
+        $this->assertStringContainsString('Accepted', $output);
     }
 }
