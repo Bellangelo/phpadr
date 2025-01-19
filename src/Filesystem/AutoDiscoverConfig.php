@@ -22,12 +22,17 @@ class AutoDiscoverConfig
         return null;
     }
 
-    public function getConfig(string $configLocation): Config
+    public function getConfigPath(string $configLocation): string
     {
         if (empty($configLocation)) {
-            return new Config($this->getRootConfig() ?? realpath(self::DEFAULT_CONFIG));
+            return $this->getRootConfig() ?? realpath(self::DEFAULT_CONFIG);
         }
 
-        return new Config(realpath($configLocation) ?: '');
+        return realpath($configLocation) ?: '';
+    }
+
+    public function getConfig(string $configLocation): Config
+    {
+        return new Config($this->getConfigPath($configLocation));
     }
 }
