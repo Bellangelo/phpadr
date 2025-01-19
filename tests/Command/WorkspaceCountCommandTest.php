@@ -83,4 +83,25 @@ class WorkspaceCountCommandTest extends TestCase
 
         $this->assertRegexp('/2/', $tester->getDisplay());
     }
+
+    public function testExecuteWithAutoDiscovery()
+    {
+        $originalValue = $GLOBALS['_composer_autoload_path'] ?? '';
+        $GLOBALS['_composer_autoload_path'] = __DIR__ . '/../data/vendor/autoload.php';
+
+        try {
+            $input = [
+                'command'  => $this->command->getName(),
+            ];
+
+            (new Application())->add($this->command);
+
+            $tester = new CommandTester($this->command);
+            $tester->execute($input);
+
+            $this->assertRegexp('/2/', $tester->getDisplay());
+        } finally {
+            $GLOBALS['_composer_autoload_path'] = $originalValue;
+        }
+    }
 }
