@@ -120,7 +120,7 @@ class MakeDecisionCommandTest extends TestCase
             ]);
 
             $this->assertRegexp('/ADR created successfully/', $tester->getDisplay());
-
+            $this->assertTrue(unlink(__DIR__ . '/../data/docs/arch/0003-foo.md'));
         } finally {
             $GLOBALS['_composer_autoload_path'] = $originalValue;
         }
