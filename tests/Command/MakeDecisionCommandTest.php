@@ -103,4 +103,26 @@ class MakeDecisionCommandTest extends TestCase
 
         $this->assertRegexp('/ADR created successfully/', $tester->getDisplay());
     }
+
+    public function testExecuteWithAutoDiscovery()
+    {
+        $originalValue = $GLOBALS['_composer_autoload_path'] ?? '';
+        $GLOBALS['_composer_autoload_path'] = __DIR__ . '/../data/vendor/autoload.php';
+
+        try {
+            (new Application())->add($this->command);
+
+            $tester = new CommandTester($this->command);
+
+            $tester->execute([
+                'command'  => $this->command->getName(),
+                'title'    => 'Foo',
+            ]);
+
+            $this->assertRegexp('/ADR created successfully/', $tester->getDisplay());
+
+        } finally {
+            $GLOBALS['_composer_autoload_path'] = $originalValue;
+        }
+    }
 }
