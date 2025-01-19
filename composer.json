@@ -32,6 +32,9 @@
             "ADR\\": "src/"
         }
     },
+    "scripts": {
+        "tests": "vendor/bin/phpunit"
+    },
     "bin": [
         "bin/phpadr"
     ]
